@@ -6,16 +6,15 @@ Built using code, psychology, and storytelling.
 
 #Plan so far 
 8th grade 
-**Goal: Explore ideas, learn basics, and build habits.**
+**Goal: Explore ideas, start coding**
 Writing / Creative:
-Brainstorm themes: trust, self-growth, and romantasy elements.
-Write short character sketches, world-building notes, or mini-scenes.
-Analyze existing fantasy stories and note how authors explore trust or personal growth.
+Start writing the story beginning at where Valeria is just starting her five trials
+Explore ways to make the text more readable 
 
 Coding / STEM:
-Learn fundamentals: Python basics, JavaScript, or beginner web development
-Create mini experiments: text-based “choose your path” games or small interactive scripts.
-Learn basic logic structures, variables, arrays, and simple user input handling.
+Start coding with the storyline involved. Find more efficient ways to do things to make code shorter and easier to read.
+Can keep what I have now and add onto it as I learn more. Split into chapters. Chapter 1 has trial of spirit, chapter 2 trial of will, and so on.
+
 
 Supporting Activities:
 Journaling ideas and reflections.
