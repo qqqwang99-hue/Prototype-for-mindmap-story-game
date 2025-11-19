@@ -20,3 +20,6 @@ Supporting Activities:
 Journaling ideas and reflections.
 Join coding or writing clubs.
 Track progress for future essays/portfolio.
+
+
+NOTE: Changed the project direction so instead of doing five different trials, one for each court, I'm focusing on one trial(Celestial) and having all the five trials be in it. The Prism is the First Artifact, meaning it's the only one w/ a mind and therefore to be able to search for/see the other artifacts in the other courts, have to pass the trial and gain the Prism.
