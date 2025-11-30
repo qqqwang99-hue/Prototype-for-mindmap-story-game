@@ -2,13 +2,7 @@
 import time
 import datetime as dt
 
-
-'''
-NOTE:
-Have to make sure it's depth and impressive but doesn't have to be large for it to be impressive
-Focus on one chapter/one trial and maybe the ending. Can mention/continue with the others but in less depth
-and mainly focus on the trial and ending because too much = overload and maybe not good as if I just do one or two things.
-'''
+#NOTE: need to figure out how to make stats stay in 0-100 range
 
 #how Valeria starts
 #Valeria's stats so far(can add or subtract to them)
@@ -16,10 +10,10 @@ and mainly focus on the trial and ending because too much = overload and maybe n
 class Valeria:
     def __init__(self):
         self.stats =  {
-        "Trust_in_Gregory":5,
+        "Trust_in_Gavriel":5,
             "Trust_in_Maximus":20,
             "Hope":10,
-            "Love_for_Gregory": 40,
+            "Love_for_Gavriel": 40,
             "Love_for_Maximus":30,
             "Willpower":50,
             "Corruption":40,
@@ -33,29 +27,31 @@ class Valeria:
         self.relics_claimed = 0
         self.Crown_claimed = False
         self.relics = {"prism":False, "crucible":False, "tear":False, "circlet":False}
-        self.courts_visited = {"Celestial":False,"Inferno":False,"Tempest":False,"Tidal":False,"Verdant":False}
         self.trials_passed = {"Celestial":False, "Inferno":False,"Tempest":False,"Tidal":False,"Verdant":False}
-
+                
     def print_all(self):
         print("Valeria's Current Stats: ")
+        print()
         for stat, value in self.stats.items():
             print(f"{stat}: {value}")
         print()
-        print("Relics Claimed.")
+        print("Relics Claimed:")
         for relic, claimed in self.relics.items():
             print(f"{relic}: {'claimed' if claimed else 'not claimed'}")
         print()
-        print("Courts Visited.")
-        for court, visit in self.courts_visited.items():
-            print(f"{court} Court: {'visited' if visit else 'not visited'}")
+        print("Trials passed:")
+        for trial, passed in self.trials_passed.items():
+            print(f"{trial} trial: {'passed' if passed else 'not passed'}")
         print()
         print("Other.")
         print(f"{self.relics_claimed} relics claimed.")
         print(f"Crown claimed = {'Yes' if self.Crown_claimed else 'No'}")
     
 
+
 val=Valeria()
-            
+
+
 time.sleep(1)
 '''There is a strange mark on her arm. Circular, ancient, and thickly ringed with a void purple color—a color so dark it was nearly black, but laced with shifting undertones of deep amethyst, indigo, and a strange, oily shimmer that sometimes looked like stars trapped beneath the surface.
 It felt like a color you could fall into—bottomless, cold, and pulsing with slow, alien energy. 
@@ -111,21 +107,22 @@ def try_again1(question, lst):
             continue
         else:
             break
-        
-full = False
+    
+
 def gained(catagory, add):
-        old = val.stats[catagory]
-        val.stats[catagory] += add
-        new = val.stats[catagory]
-        print(f"You have {'gained' if new > old else 'lost'} {abs(add)} {catagory}")
-        
+    old = val.stats[catagory]
+    val.stats[catagory] += add
+    new = val.stats[catagory]
+    print(f"You have {'gained' if new > old else 'lost'} {abs(add)} {catagory}")
+
+            
+prism_shard = False
+if val.relics["prism"] == True:
+    prism_shard = True
+#Need to finish the other four elemental quizzes if they fail the trials
 def spirit_quiz():
-    print("I had done my research and found that the Prism is the First Artifact, and the only one with a mind.")
-    print("If I won the Prism, I would also win the ability to search for the other artifacts to unlock the Crown")
-    print("Without it, I would be unable to feel the other artifacts if they were near, so it is vital to my success.")
-    print("I would go through all five elemental trials here, in the Celestial Court, and the Prism would deem me worthy or not.")
     print("I steel myself for whatever this ancient artifact might throw at me.")
-    print('"Answer my questions and you will suceed in obtaining the first of the five," the Prism whispered.')
+    print('"Answer my question and you will suceed in obtaining the first of the five," the Prism whispered.')
     print("The last tether to your old life has left you, and your spirit is freshly broken, yet still you are here.")
     print("You saw the perfect life you had. Did you regret this life so much that you were compelled to choose the vision? And if you could, would you go back in time and fix or prevent everything?")
     answers = ["A:  Yes, I regret everything and I would go back in a heartbeat to fix all those mistakes and lost chances",
@@ -141,34 +138,69 @@ def spirit_quiz():
         gained("Forgiveness",-5)
         gained("Rage", 5)
         gained("Willpower", -5)
-        print_stats("prism",False, "Celestial")
+        prism_shard = True
     elif answer == 'b':
         print("So you have learned, cursed one.")
         print()
-        val.trials_passed("Celestial",True)
+        val.trials_passed["Celestial"] = True
         gained("Willpower", 5)
         gained("Hope",5)
         gained("Intelligence", 2)
         gained("Forgiveness", 3)
         gained("Rage", -5)
         val.relics_claimed += 1
-        print_stats("prism",True, "Celestial")
-        full = True
+        val.relics["prism"] = True 
     else:
         try_again1("You saw the perfect life you had. Did you regret this life so much that you were compelled to choose the vision?", answers) 
-    answers1 = []
+def inferno_quiz():
+    answer1 = ["A: "]
     print("My consciousness was stolen and transported to the Inferno Court.")
     print("I realized I was in the Crucible of Flame---the volcano that the Inferno Palace was built next to.")
     print("Suddenly, something materialized next to the steaming pit of lava that was the center of the volcano.")
     print("It was me...")
     #time.sleep(1)
     print("My expression was twisted in a grotesque way, and dark red flames surronded my body.")
+    print("It was the demon that lurked inside me, feeding off my negativity and darkness.")
+    print("And it was strong---incredibly strong---maybe even stronger than I was, as I had been feeding the darkness for a long time now.")
+    print(''' "It's you, don't you see, little flame?" the same celestial voice whispered into my mind again. "A monstrous version of you built of pride, rage, despair and everything in between.
+It knows all your dark secrets: every fear, every desire, every hatred, every dark thought. And it will not hesitate to use them against you.
+Defeat it, little flame, and earn passage to the Embercore Fang." ''')
+    print("My copy's ruby-colored eyes shone with a deep, maniac glee, and a slow smile stretched across her bloodred lips.")
+    print()
+    val.stats["Health"] = 100
+    print("You have 100 health. If it drops to or below 0, you will have failed this trial.")
+    print()
+    print("Without warning, it charged, its movements fluid and deadly as a ninja.")
+    choice = input("Should you try to counter its attack(a) or dodge(b)?: ")
+    if choice == 'a':
+        print("Choosing to stand my ground, I reached deep inside my soul and found a roaring well of magic waiting.")
+        weapon = input("What will you create with the fire magic that has been unlocked inside you?: ")
+        print(f"Forming a {weapon} with my fire magic, I swung it to stop the oncoming attack.")
+        print("Yet it seemed to calculate my moves before I even moved, and swerved at the last moment, landing the strike.")
+        print()
+        gained("Health",-5)
+        gained("Intelligence",-5)
+        print()
+        print("A score of bloody claw marks trailed across my side, dripping dark blood onto the floor, as excrutiating burning pain exploded in my side.")
+        print("It stepped back, a satisfied smile spreading across its face.")
+    elif choice == 'b':
+        print("I knew I couldn't counter the attack because it knew me too well.")
+        print("But if I dodged, it would be harder to anticipate my moves.")
+        gained("Intelligence",5)
+    else:
+        try_again("Should you try to counter its attack(a) or dodge(b)?: ")
+       
+def tidal_quiz():
+    pass
+def verdant_quiz():
+    pass
+def tempest_quiz():
+    pass
     
-    
-
-#Celestial
-def trial_of_spirit():#Tests her mental stability and she has to choose between a happy yet delusional life or the life she has now
-    #Reward is that she fights back against the darkness/entity inside her for a bit longer
+ 
+#NOTE: do five diff functions for the five trials but just know that they all take place in the Celestial Court
+def trial_of_spirit():
+    #also need to close up some story lines if choose 'b' for some 
     print("The ancient entity within me stirred, and its soft, yet deceptive voice flowed into my head.")
     print('"It is near, do you feel that, chosen one?" it whispered softly. "Find it, we need it."')
     choice = input("Should you follow the voice in your head(a) or go back to the north wing(b)?: ").lower().strip()
@@ -203,7 +235,8 @@ def trial_of_spirit():#Tests her mental stability and she has to choose between 
             print('"Let go," a voice inside me whispered. "You deserve more than this human world has to offer. Take what was always meant to be yours, become the queen you were meant to be."')
             print("Visions flew past at high speed, each showing a better life. Then it changed to something darker.")
             print("People died on a vast battlefield. I saw myself among them, just another tick on a list of casualties at the end of the day.")
-            print('No family, no friends, nobody that cared for me, I died alone and desolate. "This is the fate that awaits you if you reject it," the Prism whispered.') 
+            print('No family, no friends, nobody that cared for me, I died alone and desolate. "This is the fate that awaits you if you reject it," the Prism whispered.')
+            print("I wanted that life so very badly. After all I had nothing left, not even Gavriel, so what was there left to fight for?")
             choice = input("Do you let go(a) or resist (b)?: ")
             if choice == 'b':
                 if val.stats["Willpower"] >= 50:
@@ -230,10 +263,10 @@ def trial_of_spirit():#Tests her mental stability and she has to choose between 
                     gained("Happiness",5)
                     gained("Forgiveness",5)
                     val.relics_claimed += 1
-                    full = True
-                    print_stats("prism",True, "Celestial")
+                    val.relics["prism"] = True
+                    val.trials_passed["Celestial"] = True
                 else:
-                    print("My will was too weak, and I didn't have the strength to suppress the vision.")
+                    print("My will was too weak, and I didn't have the strength to suppress the vision entirely.")
                     gained("Corruption", -5)
                     gained("Hope", 2)
                     gained("Willpower", 10)
@@ -246,8 +279,8 @@ def trial_of_spirit():#Tests her mental stability and she has to choose between 
             Although your will was not strong enoug, you have shown humility, temptation of power, and your ultimate wish for happiness, however impossible it may seem. Virtues that must be applauded, but the road ahead is still long,
             and if you are to walk it all the way to the end, you will need the power of the five. I gift you a shard of the power of my light, to guide you in the darkest nights.
             To pierce through the shadows that threaten to steal away your humanity, and to beat back the corruption that lives inside you."''')
-                    print("Because of this, I was only able to obtain half the Prism, but at least it was more than nothing.")
-                    full = False
+                    print("Because of this, I was only able to obtain half the Prism, but at least it was more than nothing.")      
+                    prism_shard = True
             elif choice == 'a':
                 print("The pull of the visions and the desire for happiness finally overrode my rationality.")
                 print("I gave in and allowed the visions to breach my mental barriers.")
@@ -274,7 +307,7 @@ def trial_of_spirit():#Tests her mental stability and she has to choose between 
                     print('''"You are back again I see. Tell me, little flame, do you believe in redemption?" the Prism asked.
         "But it doesn't matter, because if you are to gain my abilities, you must answer a quiz that will reflect your true intentions." ''')
                     spirit_quiz()
-                elif choice == 'b':
+                elif choice == 'b':#continue
                     print("The Prism had rejected me the first time, so maybe it was really time to give up.")
                     print()
                     gained("Hope",-10)
@@ -282,42 +315,74 @@ def trial_of_spirit():#Tests her mental stability and she has to choose between 
                     gained("Intelligence",-5)
                     gained("Corruption", 5)
                     gained("Rage", 5)
+                    print("I stayed away from the room, keeping to the north wing.")
+                    print("The days passed with the same monotony, and I started to lose my appetite to the point where I no longer remembered to eat every day.")
+                    print("I stayed in the Celestial Court past the usual alotted week against all rationality. Although we were no longer together, Gavriel was furious and sent an envoy to come collect me with force.")
+                    print("Maximus would have fought them for me, but I didn't want the conflict---I was just too tired for all of this.")
+                    print("Gavriel apologized profusely for the extreme measures he took, but...")
+                    choice = input("Do you accept the apology and try to establish friendship with Gavriel, who is your ex(a) or push him away(b)?: ")
+                    if choice == 'a':#finish
+                        print("I decided to trust him again because people deserve second chances, and we had been together for so long before it all fell apart.")
+                        gained("Love_for_Gavriel", 10)
+                        gained("Trust_in_Gavriel",15)
+                        print()
+                        print("Gavriel had already gotten a new girlfriend. She was the daughter of some lord or the other, and her name was Alyssa.")
+                        print("And she was everything I wasn't. Flawless skin, perfect attitude, gorgeous smile. It wasn't a wonder that Gavriel had cast me aside for her.")
+                        print("Although he was smitten with her, he still talked with me whenever she wasn't around, and I took those scraps that he gave.")
+                        
+                    elif choice == 'b':#finish
+                        gained("Love_for_Gavriel", -3)
+                        gained("Trust_in_Gavriel", -5)
+                        print("I decided to push him away.")
+                        print("He was my ex for a reason, and keeping him away from my heart, no matter how much I wanted him, would be good for me.")
+                    else:
+                        try_again("Do you accept the apology and try to establish friendship with Gavriel, who is your ex(a) or push him away(b)?: ")
+                        
                 else:
                     try_again("Will you take the redemption path(a) or give up and go back to the life you were living(b)?: ")
             else:
                 try_again("Do you let go(a) or resist (b)?: ")
-        elif choice == 'b': #(if the user chooses to get out of the room)
+        elif choice == 'b': #(if the user chooses to get out of the room)(need to finish the rest of the story from here)
             print()
-            gained("Hope",-3)
             gained("Intelligence",-5)
             gained("Corruption",5)
             gained("Guilt",5)
-            gained("Happiness",-3)
             print()
             print("I decided to leave this room, as beautiful as it was, because I was technically trespassing.")
             print("And if I got caught, I would most likely be imprisoned, and I had had enough of that for several lifetimes.")
         else:
             try_again("Do you reach up to grab the Prism(a) or quiet the voice and get out of the room(b)?: ")
-    elif choice == 'b':
+    elif choice == 'b':#(need to finish this part of the story)
         print()
         gained("Corruption",10)
         gained("Willpower",-5)
         gained("Hope",-5)
         gained("Intelligence",-5)
         gained("Forgiveness",-3)
-        gained("Happiness",-5)
+        gained("Happiness",-2)
         gained("Guilt",2)
         print()
         print("I decided to turn back and stay in the north wing where my rooms were located.")
     else:
         try_again("Should you follow the voice in your head(a) or go back to the north wing(b)?: ")
-def chapter1():#trial of spirit in this one
-    print("Chapter 1: ")
+        
+def trial_of_will():
+    pass
+def trial_of_trust():
+    pass
+def trial_of_heart():
+    pass
+def trial_of_balance():
+    pass
+        
+        
+def storyline():
+    #need to close up some loose strings/endings if they choose 'b'
     print()
     print("The Celestial Court holds the Starforged Prism, but Maximus is reluctant to tell me where it is.")
     print("Although we're on better terms now, he is still occassionally very closed off about topics like this, but I don't blame him. His duty first and foremost is to protect his court.")
     print("I've been spending more time in the Celestial Court, especially after...")
-    print("No---I couldn't dwell on that, or it might break me all over again. I did not care what Gregory was doing or how he was faring. No. I needed to be productive today.")
+    print("No---I couldn't dwell on that, or it might break me all over again. I did not care what Gavriel was doing or how he was faring. No. I needed to be productive today.")
     print("The artifact was probably somewhere either restricted or off limits and under strict security, which meant I was going to break some rules today.")
     print("Maximus was busy today, and would probably not be able to find me until late tonight.")
     go = input("Should you explore the Celestial Palace(a) or stay in the areas you are allowed to go(b)?: ").lower().strip()
@@ -369,7 +434,7 @@ def chapter1():#trial of spirit in this one
     "Yeah. Thanks for bringing me back to my room...," I said, knowing he probably saw me in the breaking down state.''')
             print('"What happened? Were you attacked?" he asked, tilting his head to study me.')
             choice = input("Do you tell him the truth(a) or make up a lie(b)?: ").lower().strip()
-            if choice == 'a':
+            if choice == 'a':#incomplete
                 print("Deciding to tell him the truth, I sat up in bed and looked him in the eye.")
                 print(''' "I have really bad panic attacks sometimes," I admitted in a quiet voice, unable to look him in the eye. "And sometimes
     the only way to get myself out of that state is to harm myself, because pain in the body quiets pain in the mind."''')
@@ -387,8 +452,9 @@ def chapter1():#trial of spirit in this one
                 gained("Corruption",-5)
                 gained("Rage",-10)
                 gained("Forgiveness",10)
+                gained("Heartbreak", -20)
                 print()
-            elif choice == 'b':
+            elif choice == 'b':#incomplete
                 print("I couldn't let him see that side of me.")
                 print("The side that was messy, imperfect, and tainted with sins. He would look at me differently, just like all the rest of them.")
                 print("He would try to fix me. He would pity me and treat me differently just because I was too broken to be left alone.")
@@ -406,7 +472,7 @@ def chapter1():#trial of spirit in this one
                 print()
             else:
                 try_again("Do you tell him the truth(a) or make up a lie(b)?: ")
-        elif choice == 'b':
+        elif choice == 'b':#incomplete
             print("Averting my eyes and quickly walking past, I never saw my reflection in the mirror.")
             print("After I was freed from the Nightmare Palace, I was unable to look at my reflection in the mirror.")
             print("Whenever I did, I saw a killer, a murdererr, someone who was so tainted with blood there was no skin left to be seen.")
@@ -424,13 +490,21 @@ def chapter1():#trial of spirit in this one
             try_again("Should you turn your head and look at it(a) or keep your gaze forward and quickly walk past(b)?: ")
     else:
         try_again("Should you explore the Celestial Palace(a) or stay in the areas you are allowed to go(b)?: ")
-    if full == True:
-        print("Congratulations, you have claimed Starforged Prism and successfully completed Chapter 1!")
+    if val.relics["prism"] == True:
+        print("Congratulations, you have claimed Starforged Prism!")
+        print()
+        val.print_all()
     else:
         print("You did not successfully claim the full Starforged Prism, but you have obtained a shard of it.")
         print("Although this shard is powerful, it is not enough to hold the entity at bay for long.")
         print("The window for redemption has closed...for now. Perhaps the stars will give you another chance when you have learned.")
+        print()
+        val.print_all()
         
+    print("I had done my research and found that the Prism is the First Artifact, and the only one with a mind.")
+    print("If I passed all five trials, I would also win the ability to search for the other artifacts to unlock the Crown, so the Prism was just the first step.")
+    print("I would go through all five elemental trials here, in the Celestial Court, and whether I failed or not was entirely on me.")
+    
 prophecy = '''
     This is the story of how the fallen one plunges even further.
     Slowly, over centuries, she breaks.
@@ -515,7 +589,7 @@ Maximus has shown me that I am worth it and I am enough just the way I am. I'll 
 "''')
 
 
-chapter1()
+storyline()
 print()
 
 def choice():
@@ -536,9 +610,9 @@ def choice():
             print()
             continue
 
-leaderboard = input("Would you like to post your scores on the leaderboard(y,n)?: ").strip().lower()
-leaders = []
-if leaderboard == 'y':
-    print(f"Date: {dt.date.today()}")
+# leaderboard = input("Would you like to post your scores on the leaderboard(y,n)?: ").strip().lower()
+# leaders = []
+# if leaderboard == 'y':
+#     print(f"Date: {dt.date.today()}")
 
 
