@@ -3,9 +3,6 @@ Passion project
 A story-driven app exploring trust, emotion, and personal growth.
 Built using code, psychology, and storytelling.
 
-
-#Plan so far 
-8th grade 
 **Goal: Explore ideas, start coding**
 Writing / Creative:
 Start writing the story beginning at where Valeria is just starting her five trials
